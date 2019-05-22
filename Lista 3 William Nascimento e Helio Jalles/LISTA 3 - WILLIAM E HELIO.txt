@@ -1,0 +1,685 @@
+Q1)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int soma=0;
+
+    for (int i=1;i<=100;i++) {
+        soma += i;
+    }
+    printf("%d \n\n",soma);
+    return 0;
+}
+
+
+Q2)
+
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    for (int i=1;i<=200;i++) {
+        if(i%7==0)
+            printf("%d\n",i);
+    }
+
+    return 0;
+}
+
+Q3)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    for (int i=1;i<100;i++) {
+        if(i%4==0)
+            printf("%d\n",i);
+    }
+
+    return 0;
+}
+
+Q4)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int num=0;
+    printf("Digite um numero:");
+    scanf("%d",&num);
+    printf("Seus divisores sao:\n");
+
+    for (int i=num;i>0;i--){
+        if(num%i==0)
+            printf("%d\n",i);
+    }
+
+    return 0;
+}
+
+Q5)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int num=0,fatorial=1;
+    printf("Digite um numero:");
+    scanf("%d",&num);
+    printf("Seu fatorial e:\n");
+
+    for (int i=num;i>0;i--){
+        fatorial = fatorial*i;
+    }
+    printf("%d \n",fatorial);
+    return 0;
+}
+
+Q6)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int L=0;
+
+    printf("Digite um numero:");
+    scanf("%d",&L);
+
+    int x=0;
+    while(pow(x,2)<L){
+    x++;
+    }
+
+    printf("%d \n",x);
+    return 0;
+}
+
+Q7)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    printf("Tabuada do 4:\n");
+
+    for (int i = 1; i <= 10; ++i) {
+        printf(" 4 * %d = %d \n",i,(4*i));
+    }
+
+    return 0;
+}
+
+Q8)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int num;
+    printf("Digite um numero:");
+    scanf("%d",&num);
+
+    printf("Tabuada do %d:\n",num);
+
+    for (int i = 1; i <= 10; ++i) {
+        printf(" %d * %d = %d \n",num,i,(num*i));
+    }
+
+    return 0;
+}
+
+Q9)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int main(){
+    int cont=0;
+    float soma=0;
+    for (int i = 13; i <= 73; ++i) {
+        if(i%2==0){
+            soma += i;
+            cont++;
+        }
+    }
+
+    printf("media : %f",(soma/cont));
+
+    return 0;
+}
+
+
+Q10)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int num[10];
+
+    for (int i = 0; i < 10; ++i) {
+        printf("Digite um numero:");
+        scanf("%d",&num[i]);
+    }
+    printf("Dentro do intervalo [10,50]:\n");
+    for (int i = 0; i < 10; ++i){
+        if(num[i]>=10 && num[i]<=50)
+        printf("%d\n",num[i]);
+    }
+    printf("Fora do intervalo [10,50]:\n");
+    for (int i = 0; i < 10; ++i){
+        if(num[i]<10 || num[i]>50)
+        printf("%d\n",num[i]);
+    }
+
+    return 0;
+}
+
+Q11)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int num;
+    int primo=0;
+    printf("Digite um numero:");
+    scanf("%d",&num);
+    int i = num-1;
+    while (i>1) {
+        if(num%i==0)
+            primo =1;
+        i--;
+    }
+    if(primo)
+        printf("nao e primo\n");
+    else {
+        printf("e primo\n");
+    }
+
+    return 0;
+}
+
+Q12)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+//1,2,3,5,7,
+    int num;
+    int cont = 2;
+    int primos[12];
+    primos[0] = 1;
+    primos[1] = 2;
+    int primo=0;
+
+    for (int i = 3; cont < 12; i++) {
+
+        num = i-1;
+        while (num>1) {
+            if(i%num==0)
+                primo = 1;
+            num--;
+        }
+        if(primo){
+            primo = 0;
+        }else{
+            primos[cont] = i;
+            cont++;
+        }
+    }
+
+    printf("%d \n",(primos[5]-primos[11]));
+
+    return 0;
+}
+
+Q13)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int n;
+    int fib1 = 0;
+    int fib2 = 1;
+    int valor;
+
+    printf("Digite um numero:");
+    scanf("%d",&n);
+
+    printf("{ 1,2");
+
+    for (int i = 2; i < n; ++i) {
+
+        valor = fib1 + fib2;
+        fib1 = fib2;
+        fib2 = valor;
+
+        printf(", %d",valor);
+    }
+
+    printf(" }\n");
+    return 0;
+}
+
+Q14)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    int cont =0;
+
+    printf("{ 1,2");
+
+    for (int i = 1000; cont<=20 || i < 2000; ++i) {
+
+        if(i%11==5){
+            printf("%d\n",i);
+            cont++;
+        }
+
+    }
+
+    return 0;
+}
+
+Q15)
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+    char array[100] = "maria betina";
+    int cont=0;
+
+    printf("digite o texto\n>>>");
+    scanf("%s",array);
+
+    for (int i = 0;array[i]!=0; cont++,++i){
+        //printf("%d\n",array[i]);
+
+    }
+
+    printf("Tem %d chars\n",cont);
+
+
+
+    return 0;
+}
+
+Q16)
+#include <stdio.h>
+#include <math.h>
+
+int contaArray(char array[]){
+    int cont=0;
+    for (int i = 0;array[i]!=0; cont++,++i){}
+    return cont;
+}
+
+int main(){
+
+    char array[100] = "O rato roeu a roupa do rei";
+    char inverso[100];
+
+    int cont= contaArray(array);
+    int b;
+    for (int i = 0; i < cont; ++i){
+
+        b = (cont-1) - i;
+        inverso[i] = array[b];
+
+    }
+    inverso[cont]=0;
+    printf("%s\n",array);
+    printf("%s\n",inverso);
+
+    return 0;
+}
+Q17)
+#include <stdio.h>
+#include <math.h>
+
+
+int main(){
+
+    float celcius;
+    float fahrenheit;
+
+    printf("digite o valor em celcius:");
+    scanf("%f",&celcius);
+
+    fahrenheit = ((celcius*9)/5)+32;
+
+    printf("celcius: %f C= fahrenheit: %f F\n\n",celcius,fahrenheit);
+
+    return 0;
+}
+
+Q18)
+#include <stdio.h>
+#include <math.h>
+
+
+int main(){
+
+    float celcius;
+    float fahrenheit;
+
+    printf("digite o valor em fahrenheit:");
+    scanf("%f",&fahrenheit);
+
+    celcius = ((fahrenheit-32)*5)/9;
+
+    printf("celcius: %f C= fahrenheit: %f F\n\n",celcius,fahrenheit);
+
+    return 0;
+}
+
+Q19)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+int aleatorio(int a, int b){
+    srand(time(0));
+    int x;
+
+    x = a + (rand() % b);
+
+    return x;
+}
+
+int main(){
+
+    int x,a,b;
+
+    printf("digite o valor min:");
+    scanf("%d",&a);
+    printf("digite o valor min:");
+    scanf("%d",&b);
+
+    x = aleatorio(a,b);
+
+    printf("%d\n\n",x);
+
+    return 0;
+}
+
+Q20)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+void fatora(int a){
+    int i=2;
+    while (a>1){
+        if(a%i==0){
+            if(a/i == 1){
+                a = a/i;
+                printf("%d ",i);
+            }else {
+                a = a/i;
+                printf("%d X ",i);
+            }
+        }else{
+            i++;
+        }
+    }
+}
+
+int main(){
+
+    int x,a,b;
+
+    printf("digite o valor :");
+    scanf("%d",&x);
+
+    fatora(x);
+
+    printf("\n\n");
+
+    return 0;
+}
+
+Q21)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+
+int main(){
+
+    int tamanho = 5;
+
+    int dados[] = { 4, 5, 6, 1, 8};
+
+    for(int i = 0; i < tamanho; ++i){
+        for (int j = 0; j < dados[i]; ++j){
+            printf("*");
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+Q22)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+
+    int tamanho = 5;
+    int x=5;
+    int dados[] = { 4, 5, 6, 1, 8};
+
+    int maiorvalor=0;
+    for (int i = 0; i < tamanho; ++i){
+
+        if(maiorvalor<dados[i]){
+            maiorvalor = dados[i];
+        }
+    }
+
+    int cont=0;
+    char matriz [maiorvalor][tamanho];
+
+    for (int i = 0; i < maiorvalor; ++i){
+        for (int j = 0; j < tamanho; ++j){
+            matriz[i][j] = ' ';
+        }
+
+    }
+
+    for (int c = 0; c < tamanho; ++c){
+        for (int l = maiorvalor-1; l >= 0; --l){
+            if(cont<dados[c]){
+                matriz[l][c] = '*';
+                cont++;
+            }
+        }
+        cont=0;
+    }
+
+    for (int i = 0; i < maiorvalor; ++i){
+        for (int j = 0; j < tamanho; ++j){
+            printf("%c",matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    return 0;
+}
+
+Q23)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+int caracteres(char array[]){
+    int cont=0;
+    for (int i = 0;array[i]!=0; cont++,++i){
+        if(array[i] == ' ')
+            cont--;
+    }
+    return cont;
+}
+int tam(char array[]){
+    int cont=0;
+    for (int i = 0;array[i]!=0; cont++,++i){}
+    return cont;
+}
+
+int contaPalavras(char array[]){
+    int cont=0;
+    int letras=0;
+    int tamanho = tam(array);
+    for (int i = 0;array[i]!=0; ++i){
+        if(array[i] != ' '){
+            letras = 1;
+        }
+        if(letras == 1 && (array[i] == ' ' || i==(tamanho-1))){
+            letras =0;
+            cont++;
+        }
+    }
+    return cont;
+}
+
+int main(){
+
+    //ler texto do teclado e escreve em linha[]
+    char linha[100];
+
+    {//ler teclado
+
+        char caractere;
+        int i=0;
+        do {
+            caractere = getchar();
+            linha[i] = caractere;
+            ++i;
+        } while (caractere != '\n');
+        linha[i-1] = '\0';
+    }
+    printf("%d caracteres e %d palavras\n\n",caracteres(linha),contaPalavras(linha));
+
+    return 0;
+}
+
+Q24)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+int tamLit(char array[]){
+    int cont=0;
+    for (int i = 0;array[i]!=0; cont++,++i){}
+    return cont;
+}
+
+void reverse(char array[]){
+    char inverso[100];
+    int cont= tamLit(array);
+    int b;
+    for (int i = 0; i < cont; ++i){
+        b = (cont-1) - i;
+        inverso[i] = array[b];
+    }
+    inverso[cont]=0;
+    for (int i = 0; i < cont; ++i){
+        array[i] = inverso[i];
+    }
+    return;
+}
+
+int main(){
+    //ler texto do teclado e escreve em linha[]
+    printf("escreva o texto:\n>>> ");
+    char linha[100];
+
+    {//ler teclado
+        char caractere;
+        int i=0;
+        do {
+            caractere = getchar();
+            linha[i] = caractere;
+            ++i;
+        } while (caractere != '\n');
+        linha[i-1] = '\0';
+    }
+
+    printf("%s\n",linha);
+    reverse(linha);
+    printf("%s\n",linha);
+
+    return 0;
+}
+
+Q25)
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+int tamLit(char array[]){
+    int cont=0;
+    for (int i = 0;array[i]!=0; cont++,++i){}
+    return cont;
+}
+
+int main(){
+//a-z -> 97-122
+//A-Z -> 65-90
+
+    //ler texto do teclado e escreve em linha[]
+        printf("escreva o texto:\n>>> ");
+        char linha[100];
+
+        {//ler teclado
+            char caractere;
+            int i=0;
+            do {
+                caractere = getchar();
+                linha[i] = caractere;
+                ++i;
+            } while (caractere != '\n');
+            linha[i-1] = '\0';
+        }
+        printf("%d\n",tamLit(linha));
+        int cont=0;
+
+            for(int j = 65; j <= 90; ++j){
+                for (int i = 0; i < tamLit(linha); ++i){
+
+                    if(linha[i] == j || linha[i] == (j+32)){
+                        cont++;
+                    }
+                }
+                printf("%d vezes %c \n",cont,j);
+                cont=0;
+            }
+
+    return 0;
+}
+
