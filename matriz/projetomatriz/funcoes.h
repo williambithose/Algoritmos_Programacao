@@ -8,11 +8,12 @@ struct matriz {
 };
 
 int menu(void);
-void setTamanho(struct matriz m);
-void printMatriz(struct matriz m);
-void setManual(struct  matriz m);
-void printMatriz(struct matriz m);
-
+struct matriz setTamanho(struct  matriz m);
+struct matriz printMatriz(struct matriz m);
+struct matriz setManual(struct  matriz m);
+struct matriz setRandom(struct  matriz m);
+void imprimir(struct matriz m);
+void next();
 
 
 #endif // FUNCOES_H

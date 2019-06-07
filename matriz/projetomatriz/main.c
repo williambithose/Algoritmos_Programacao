@@ -1,70 +1,86 @@
 #include <stdio.h>
 #include <funcoes.h>
 
-void arquivo(struct matriz m){// ajeitar
+
+
+struct matriz arquivo(struct matriz m){// ajeitar
 
     FILE *file;
 
-    int x,y, z;
-    int matriz[50][50];
+    char diretorio[100];
+    printf("informe o diretório do arquvo: ");
+    scanf("%s",diretorio);
+    printf("%s\n",diretorio);
 
 
-    file = fopen("/home/williammcn/testeqt/numeros.txt", "r");
+    // /home/williammcn/testeqt/numeros.txt
+    file = fopen(diretorio, "r");
 
     //ler valor das linha e colunas, respecticamente
-    fscanf(file,"%d %d",&x, &y);
-    printf("Linhas: %d\nColunas:%d\n\n",x,y);
+    fscanf(file,"%d %d",&m.nlinhas, &m.ncolunas);
+    printf("Linhas: %d\nColunas:%d\n\n",m.nlinhas,m.ncolunas);
 
     //limpa a matriz
-    for (int i = 0; i < 20; ++i) {
-        for (int j = 0; j < 20; ++j) {
-            matriz[i][j] = 0;
+    for (int i = 0; i < m.nlinhas; ++i) {
+        for (int j = 0; j < m.ncolunas; ++j) {
+            m.dados[i][j] = 0;
         }
     }
     //pega os valores do arquivo e joga na matriz
-    for (int i = 0; i < x; ++i) {
-        for (int j = 0; j < y; ++j) {
-             fscanf(file," %d ",&matriz[i][j]);
+    for (int i = 0; i < m.nlinhas; ++i) {
+        for (int j = 0; j < m.ncolunas; ++j) {
+             fscanf(file," %f ",&m.dados[i][j]);
         }
     }
+    return m;
 }
+
 
 int main(){
 
     struct matriz A,B,C;
     int aux, ison = 1;
+
     while (ison) {
+
 
         aux = menu();
 
         switch (aux) {
         case 1:
-            setTamanho(A);
+            A = setTamanho(A);
+            printf("%d %d",A.nlinhas, A.ncolunas);
             break;
         case 2:
-            setTamanho(B);
+            B = setTamanho(B);
             break;
         case 3:
-            setRandom(A);
+            A = setRandom(A);
             break;
         case 4:
-            setRandom(B);
+            B = setRandom(B);
             break;
         case 5:
-            setManual(A);
+            A = setManual(A);
             break;
         case 6:
-            setManual(B);
+            B = setManual(B);
             break;
 
         case 10:
-            printMatriz(A);
+            imprimir(A);
             break;
         case 11:
-            printMatriz(B);
+            imprimir(B);
             break;
         case 12:
-            printMatriz(C);
+            imprimir(C);
+            break;
+        case 13:
+            A = arquivo(A);
+            break;
+        case 14:
+            arquivo(B);
             break;
 
         case 16:

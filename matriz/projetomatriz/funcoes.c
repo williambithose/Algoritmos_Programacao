@@ -34,17 +34,20 @@ int menu(void){
 
 }
 
-//PROTOTIPO DAS FUNÇÕES
-
 //Adiciona tamanho de linhas e colunas no struct
-void setTamanho(struct  matriz m){
+struct matriz setTamanho(struct  matriz m){
 
-    printf("informe o numero de linhas de A:\n");
+    printf("informe o numero de linhas da matriz:\n");
     scanf("%d",&m.nlinhas);
-    printf("informe o numero de colunas de A:\n");
+    printf("informe o numero de colunas da matriz:\n");
     scanf("%d",&m.ncolunas);
+
+    next();
+    return m;
 }
-void setRandom(struct  matriz m){
+
+
+struct matriz setRandom(struct  matriz m){
     srand(time(NULL));
     int min, max;
     if(m.nlinhas !=0 && m.ncolunas !=0){
@@ -56,18 +59,21 @@ void setRandom(struct  matriz m){
 
         for (int i = 0; i < m.nlinhas; ++i){
             for (int j = 0; j < m.ncolunas; ++j){
-                m.dados[i][j] = min + rand() % max;
+                m.dados[i][j] = /*min +*/ rand() /*% max*/;
             }
         }
 
     }else {
         printf("Matriz não definida\n");
-        return;
+        next();
+        return m;
     }
-    return;
+    next();
+    return m;
 }
 
-void setManual(struct  matriz m){
+
+struct matriz setManual(struct  matriz m){
 
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
@@ -83,26 +89,15 @@ void setManual(struct  matriz m){
 
     }else {
         printf("Matriz não definida\n");
-        return;
+        next();
+        return m ;
     }
-    return;
+    next();
+    return m;
 }
 
-void soma(struct matriz m1, struct matriz m2){
-    if((m1.nlinhas == m2.nlinhas) && (m1.ncolunas == m2.ncolunas)){
 
-        for (int i = 0; i < m1.nlinhas; ++i){
-            for (int j = 0; j < m1.ncolunas; ++j){
-                //REALIZA A SOMA
-            }
-            printf("\n");
-        }
-
-    }else
-        printf("TAMANHOS DAS MATRIZES INCOMPATIVEIS !");
-}
-
-void printMatriz(struct matriz m){
+void imprimir(struct matriz m){
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
     for (int i = 0; i < m.nlinhas; ++i){
@@ -114,7 +109,19 @@ void printMatriz(struct matriz m){
 
     }else {
         printf("Matriz não definida\n");
-        return;
+
     }
+    next();
     return;
+}
+
+//PROTOTIPO DAS FUNÇÕES
+void next(){
+    printf("\n\n precione alguma coisa para continuar: ");
+        //ler teclado
+
+            char caractere;
+            caractere = getchar();
+
+        printf("\n\n\n\n\n\n\n\n\n");
 }
