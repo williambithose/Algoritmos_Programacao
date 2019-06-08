@@ -42,7 +42,7 @@ struct matriz setTamanho(struct  matriz m){
     printf("informe o numero de colunas da matriz:\n");
     scanf("%d",&m.ncolunas);
 
-    next();
+
     return m;
 }
 
@@ -59,16 +59,14 @@ struct matriz setRandom(struct  matriz m){
 
         for (int i = 0; i < m.nlinhas; ++i){
             for (int j = 0; j < m.ncolunas; ++j){
-                m.dados[i][j] = /*min +*/ rand() /*% max*/;
+                m.dados[i][j] = min + (rand() % (min-max+1));
             }
         }
 
     }else {
         printf("Matriz não definida\n");
-        next();
-        return m;
     }
-    next();
+
     return m;
 }
 
@@ -89,10 +87,10 @@ struct matriz setManual(struct  matriz m){
 
     }else {
         printf("Matriz não definida\n");
-        next();
+
         return m ;
     }
-    next();
+
     return m;
 }
 
@@ -111,17 +109,7 @@ void imprimir(struct matriz m){
         printf("Matriz não definida\n");
 
     }
-    next();
+
     return;
 }
 
-//PROTOTIPO DAS FUNÇÕES
-void next(){
-    printf("\n\n precione alguma coisa para continuar: ");
-        //ler teclado
-
-            char caractere;
-            caractere = getchar();
-
-        printf("\n\n\n\n\n\n\n\n\n");
-}

@@ -43,7 +43,7 @@ int main(){
 
     while (ison) {
 
-
+        printf("\n\n");
         aux = menu();
 
         switch (aux) {
