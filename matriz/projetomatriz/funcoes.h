@@ -13,7 +13,6 @@ struct matriz printMatriz(struct matriz m);
 struct matriz setManual(struct  matriz m);
 struct matriz setRandom(struct  matriz m);
 void imprimir(struct matriz m);
-void next();
 
 
 #endif // FUNCOES_H
