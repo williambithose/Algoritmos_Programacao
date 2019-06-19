@@ -13,6 +13,8 @@ struct matriz printMatriz(struct matriz m);
 struct matriz setManual(struct  matriz m);
 struct matriz setRandom(struct  matriz m);
 void imprimir(struct matriz m);
+struct matriz import_matriz(struct matriz m);
+struct matriz export_matriz(struct matriz m);
 
 
 #endif // FUNCOES_H

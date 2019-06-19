@@ -1,4 +1,5 @@
 #include <funcoes.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -48,7 +49,9 @@ struct matriz setTamanho(struct  matriz m){
 
 
 struct matriz setRandom(struct  matriz m){
+
     srand(time(NULL));
+
     int min, max;
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
@@ -113,3 +116,66 @@ void imprimir(struct matriz m){
     return;
 }
 
+struct matriz import_matriz(struct matriz m){
+
+    FILE *file;
+
+    char diretorio[100];
+    printf("informe o diretório do arquvo: ");
+    scanf("%s",diretorio);
+    printf("%s\n",diretorio);
+
+
+    // /home/williammcn/testeqt/numeros.txt
+    file = fopen("/home/williammcn/testeqt/numeros.txt"/*diretorio*/, "r");
+
+    if(file == 0)//diretório não existe
+        printf("DEU ERRADO");
+
+    //ler valor das linha e colunas, respecticamente
+    fscanf(file,"%d %d",&m.nlinhas, &m.ncolunas);
+    printf("Linhas: %d\nColunas:%d\n\n",m.nlinhas,m.ncolunas);
+
+    //limpa a matriz
+    for (int i = 0; i < m.nlinhas; ++i) {
+        for (int j = 0; j < m.ncolunas; ++j) {
+            m.dados[i][j] = 0;
+        }
+    }
+    //pega os valores do arquivo e joga na matriz
+    for (int i = 0; i < m.nlinhas; ++i) {
+        for (int j = 0; j < m.ncolunas; ++j) {
+             fscanf(file," %f ",&m.dados[i][j]);
+        }
+    }
+    fclose(file);
+    return m;
+}
+
+struct matriz export_matriz(struct matriz m){
+
+    FILE *file;
+
+    char diretorio[100];
+    printf("informe o diretório do arquvo: ");
+    scanf("%s",diretorio);
+    printf("%s\n",diretorio);
+
+    //"/home/williammcn/testeqt/saida.txt"
+    file = fopen(diretorio, "r");
+
+    if(file == 0)//diretório não existe
+        printf("DEU ERRADO");
+
+    fprintf(file,"%d %d\n", m.nlinhas, m.ncolunas);
+
+    for (int i = 0; i < m.nlinhas; ++i) {
+        for (int j = 0; j < m.ncolunas; ++j) {
+            fprintf(file,"%2f ", m.dados[i][j]);
+        }
+        fprintf(file,"\n");
+    }
+
+    fclose(file);
+    return m;
+}
