@@ -47,7 +47,7 @@ int main(){
             C = subtracao(A,B);
             break;
         case 9:
-            C = multiplicacao(A,B);
+            //C = multiplicacao(A,B);
             break;
         case 10:
             printMatriz(A);
@@ -67,7 +67,6 @@ int main(){
         case 15:
             export_matriz(A);
             break;
-
         case 16:
             isOn = 0;
             break;

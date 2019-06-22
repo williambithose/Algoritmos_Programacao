@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 
 /**
 ************************* FUNCOES VISUAIS ***********************************************
@@ -19,7 +20,7 @@
 
 int menu(void){
 
-    int aux=0; /**< Struct que recebera a matriz resultado da operacao */
+    int aux;        /**< Struct que recebera a matriz resultado da operacao */
 
     /**
      * Imprimir o layout do menu
@@ -50,7 +51,6 @@ int menu(void){
     scanf("%d",&aux);
 
     return aux;
-
 }
 
 void printMatriz(struct matriz m){
@@ -238,31 +238,39 @@ struct matriz subtracao(struct matriz A, struct matriz B){
 
 struct matriz import_matriz(struct matriz m){
 
-    FILE *file;
+    FILE *file;             /**< Arquivo a ser lido */
+    char diretorio[100];    /**< Caminho do diretorio */
+    int isValido =1;        /**< Guarda se o diretorio e valido ou nao */
 
-    char diretorio[100];
-    int check=1;
-
+    /**
+     * Le o diretorio do usuario ate que seja um diretorio valido
+     */
     do {
-        printf("informe o diretório do arquvo: ");
+        printf("Informe o diretório do arquvo: ");
         scanf("%s",diretorio);
-        printf("%s\n",diretorio);
+        //printf("%s\n",diretorio);
 
         // /home/williammcn/testeqt/numeros.txt
+        /** abre o arquivo para leitura */
         file = fopen(diretorio, "r");
 
+        /**
+         * Detecta se o diretorio existe ou nao
+         */
         if(file == 0){//diretório não existe
             printf("DIRETORIO INVALIDO\n");
         }else {
-            check = 0;
+            isValido  = 0;
         }
-    } while (check);
+    } while (isValido );
 
-    //ler valor das linha e colunas, respecticamente
+    /**
+     * ler valor das linha e colunas, respecticamente
+     */
     fscanf(file,"%d %d",&m.nlinhas, &m.ncolunas);
     printf("Linhas: %d\nColunas:%d\n\n",m.nlinhas,m.ncolunas);
 
-    /*
+    /**
     * Confere se o tamanho da matriz é superior ao tamanho maximo
     * Se Sim: Zera os valores e exibe uma mensagem
     * Se Nao: Continua normalmente
@@ -276,13 +284,18 @@ struct matriz import_matriz(struct matriz m){
         return m;
     }
 
-    //limpa a matriz
+    /**
+     * limpa a matriz
+     */
     for (int i = 0; i < m.nlinhas; ++i) {
         for (int j = 0; j < m.ncolunas; ++j) {
             m.dados[i][j] = 0;
         }
     }
-    //pega os valores do arquivo e joga na matriz
+
+    /**
+     * pega os valores do arquivo e joga na matriz
+     */
     for (int i = 0; i < m.nlinhas; ++i) {
         for (int j = 0; j < m.ncolunas; ++j) {
              fscanf(file," %f ",&m.dados[i][j]);
@@ -294,19 +307,25 @@ struct matriz import_matriz(struct matriz m){
 
 void export_matriz(struct matriz m){
 
-    FILE *file;
+    FILE *file;             /**< Arquivo o qual sera salvo */
+    char diretorio[100];    /**< Caminho do diretorio */
+    int check=1;            /**< Guarda se o diretorio e valido ou nao */
 
-    char diretorio[100];
-    int check=1;
-
+    /**
+     * Le o diretorio do usuario ate que seja um diretorio valido
+     */
     do {
         printf("informe o diretório do arquvo: ");
         scanf("%s",diretorio);
-        printf("%s\n",diretorio);
+        //printf("%s\n",diretorio);
 
         // /home/williammcn/testeqt/numeros.txt
-        file = fopen(diretorio, "r");
+        /** abre o arquivo para escrita */
+        file = fopen(diretorio, "w");
 
+        /**
+         * Detecta se o diretorio existe ou nao
+         */
         if(file == 0){//diretório não existe
             printf("DIRETORIO INVALIDO\n");
         }else {
@@ -314,15 +333,22 @@ void export_matriz(struct matriz m){
         }
     } while (check);
 
+    /**
+     * escreve no arquivo os valores das linha e colunas
+     */
     fprintf(file,"%d %d\n", m.nlinhas, m.ncolunas);
 
-    for (int i = 0; i < m.nlinhas; ++i) {
+    /**
+     * escreve no arquivo os dados da matriz
+     */
+    for(int i = 0; i < m.nlinhas; ++i) {
         for (int j = 0; j < m.ncolunas; ++j) {
             fprintf(file,"%2f ", m.dados[i][j]);
         }
         fprintf(file,"\n");
     }
 
+    /** Fechar o arquivo */
     fclose(file);
     return ;
 }
