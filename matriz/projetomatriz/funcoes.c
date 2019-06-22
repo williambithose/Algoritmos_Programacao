@@ -1,13 +1,29 @@
+/**
+ * @file funcoes.c
+ * @author William Nascimento e Helio Jales
+ * @date 26 jun 2019
+ * @brief Guarda as funções usadas no main.c
+ *
+ * @see https://github.com/williambithose/Algoritmos_Programacao/tree/master/matriz/projetomatriz
+ */
+
+
 #include <funcoes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
+/**
+************************* FUNCOES VISUAIS ***********************************************
+*/
+
 int menu(void){
 
-    int aux=0;
+    int aux=0; /**< Struct que recebera a matriz resultado da operacao */
 
-    //Imprimir o layout do menu
+    /**
+     * Imprimir o layout do menu
+     */
     printf("PROGRAMA DE MANIPULACAO DE MATRIZES\n");
     printf("(1) Definir o tamanho da matriz A\n");
     printf("(2) Definir o tamanho da matriz B\n");
@@ -27,7 +43,9 @@ int menu(void){
     printf("(16) Sair\n");
     printf("\n");
 
-    //Ler a funcao desejada
+    /**
+     * Ler a funcao desejada
+     */
     printf("Digite a operacao desejada: ");
     scanf("%d",&aux);
 
@@ -35,24 +53,77 @@ int menu(void){
 
 }
 
-//Adiciona tamanho de linhas e colunas no struct
+void printMatriz(struct matriz m){
+
+    /**
+     * Caso a Matriz já exista
+     * Imprime seus valores na tela
+     *
+     * Caso a Matriz não exista
+     * Sai da função
+     */
+    if(m.nlinhas !=0 && m.ncolunas !=0){
+
+        for (int i = 0; i < m.nlinhas; ++i){
+            for (int j = 0; j < m.ncolunas; ++j){
+                printf(" %4.2f",m.dados[i][j]);
+            }
+            printf("\n");
+        }
+
+    }else {
+        printf("Matriz não definida\n");
+    }
+
+    return;
+}
+
+/**
+************************* FUNCOES DE ATRIBUICAO DE VALORES ******************************
+*/
+
 struct matriz setTamanho(struct  matriz m){
 
+    /**
+     * Faz leitura dos tamanhos desejados
+    */
     printf("informe o numero de linhas da matriz:\n");
     scanf("%d",&m.nlinhas);
     printf("informe o numero de colunas da matriz:\n");
     scanf("%d",&m.ncolunas);
 
+    /**
+    * Confere se o tamanho da matriz é superior ao tamanho maximo
+    * Se Sim: Zera os valores e exibe uma mensagem
+    * Se Nao: Continua normalmente
+    */
+    if(m.nlinhas >100 || m.ncolunas > 100){
+        printf("O Tamanho de linhas da matriz está além do tamanho máximo permitido (100)\n");
+        printf("tente novamente com tamanhos menores\n");
+        m.nlinhas = 0;
+        m.ncolunas= 0;
+    }
 
     return m;
 }
 
-
 struct matriz setRandom(struct  matriz m){
 
+    /**
+     * Adiciona a um srando um valor baseado na hora
+     * para que os valores aleatórios sejam mais variados
+     */
     srand(time(NULL));
 
-    int min, max;
+    int min, max;       /**< Valores minimo e maximos do intervalo de valores aleatorios */
+
+    /**
+     * Caso a Matriz já exista
+     * Recebe os limites do usuário e add os valores aleatorios na matriz
+     *
+     * Caso a Matriz não exista
+     * Sai da função
+     */
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
         printf("Informe o valor minimo (inteiro)");
@@ -73,16 +144,22 @@ struct matriz setRandom(struct  matriz m){
     return m;
 }
 
-
 struct matriz setManual(struct  matriz m){
 
+    /**
+     * Caso a Matriz já exista
+     * Recebe os valores do usuario e insere na matriz
+     *
+     * Caso a Matriz não exista
+     * Sai da função
+     */
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
         printf("Informe os valores nas posicoes:");
         int aux;
         for (int i = 0; i < m.nlinhas; ++i){
             for (int j = 0; j < m.ncolunas; ++j){
-                printf("matriz na linha %d e coluna %d",i,j);
+                printf("matriz na linha %d e coluna %d : ",i,j);
                 scanf("%d",&aux);
                 m.dados[i][j] = aux;
             }
@@ -97,44 +174,107 @@ struct matriz setManual(struct  matriz m){
     return m;
 }
 
+/**
+************************* FUNCOES DE OPERACOES ******************************************
+*/
 
-void imprimir(struct matriz m){
-    if(m.nlinhas !=0 && m.ncolunas !=0){
+struct matriz soma(struct matriz A, struct matriz B){
 
-    for (int i = 0; i < m.nlinhas; ++i){
-        for (int j = 0; j < m.ncolunas; ++j){
-            printf(" %4.2f",m.dados[i][j]);
+    struct matriz C; /**< Struct que recebera a matriz resultado da operacao */
+
+    /**
+     * Caso as Matrizes tenham tamanhos iguais
+     * Realiza a operacao e o resultado e gravado na matriz C
+     *
+     * Caso as Matrizes não tenham tamanhos iguas
+     * Sai da função
+     */
+    if((A.nlinhas == B.nlinhas) && (A.ncolunas == B.ncolunas)){
+
+        C.nlinhas = A.nlinhas;
+        C.ncolunas = A.ncolunas;
+
+        for (int i = 0; i < A.nlinhas; ++i){
+            for (int j = 0; j < A.ncolunas; ++j){
+                C.dados[i][j] = A.dados[i][j] + B.dados[i][j];
+            }
         }
-        printf("\n");
-    }
 
-    }else {
-        printf("Matriz não definida\n");
-
-    }
-
-    return;
+        return C;
+    }else
+        printf("TAMANHOS DAS MATRIZES INCOMPATIVEIS !");
 }
+
+struct matriz subtracao(struct matriz A, struct matriz B){
+
+    struct matriz C; /**< Struct que recebera a matriz resultado da operacao */
+
+    /**
+     * Caso as Matrizes tenham tamanhos iguais
+     * Realiza a operacao e o resultado e gravado na matriz C
+     *
+     * Caso as Matrizes não tenham tamanhos iguas
+     * Sai da função
+     */
+    if((A.nlinhas == B.nlinhas) && (A.ncolunas == B.ncolunas)){
+
+        C.nlinhas = A.nlinhas;
+        C.ncolunas = A.ncolunas;
+
+        for (int i = 0; i < A.nlinhas; ++i){
+            for (int j = 0; j < A.ncolunas; ++j){
+                C.dados[i][j] = A.dados[i][j] + B.dados[i][j];
+            }
+        }
+
+        return C;
+    }else
+        printf("TAMANHOS DAS MATRIZES INCOMPATIVEIS !");
+}
+
+/**
+************************* FUNCOES DE MANIPULACAO DE ARQUIVO *****************************
+*/
 
 struct matriz import_matriz(struct matriz m){
 
     FILE *file;
 
     char diretorio[100];
-    printf("informe o diretório do arquvo: ");
-    scanf("%s",diretorio);
-    printf("%s\n",diretorio);
+    int check=1;
 
+    do {
+        printf("informe o diretório do arquvo: ");
+        scanf("%s",diretorio);
+        printf("%s\n",diretorio);
 
-    // /home/williammcn/testeqt/numeros.txt
-    file = fopen("/home/williammcn/testeqt/numeros.txt"/*diretorio*/, "r");
+        // /home/williammcn/testeqt/numeros.txt
+        file = fopen(diretorio, "r");
 
-    if(file == 0)//diretório não existe
-        printf("DEU ERRADO");
+        if(file == 0){//diretório não existe
+            printf("DIRETORIO INVALIDO\n");
+        }else {
+            check = 0;
+        }
+    } while (check);
 
     //ler valor das linha e colunas, respecticamente
     fscanf(file,"%d %d",&m.nlinhas, &m.ncolunas);
     printf("Linhas: %d\nColunas:%d\n\n",m.nlinhas,m.ncolunas);
+
+    /*
+    * Confere se o tamanho da matriz é superior ao tamanho maximo
+    * Se Sim: Zera os valores e exibe uma mensagem
+    * Se Nao: Continua normalmente
+    */
+    if(m.nlinhas >100 || m.ncolunas > 100){
+        printf("O Tamanho de linhas da matriz está além do tamanho máximo permitido (100)\n");
+        printf("tente novamente com tamanhos menores\n");
+        m.nlinhas = 0;
+        m.ncolunas= 0;
+
+        return m;
+    }
 
     //limpa a matriz
     for (int i = 0; i < m.nlinhas; ++i) {
@@ -152,20 +292,27 @@ struct matriz import_matriz(struct matriz m){
     return m;
 }
 
-struct matriz export_matriz(struct matriz m){
+void export_matriz(struct matriz m){
 
     FILE *file;
 
     char diretorio[100];
-    printf("informe o diretório do arquvo: ");
-    scanf("%s",diretorio);
-    printf("%s\n",diretorio);
+    int check=1;
 
-    //"/home/williammcn/testeqt/saida.txt"
-    file = fopen(diretorio, "r");
+    do {
+        printf("informe o diretório do arquvo: ");
+        scanf("%s",diretorio);
+        printf("%s\n",diretorio);
 
-    if(file == 0)//diretório não existe
-        printf("DEU ERRADO");
+        // /home/williammcn/testeqt/numeros.txt
+        file = fopen(diretorio, "r");
+
+        if(file == 0){//diretório não existe
+            printf("DIRETORIO INVALIDO\n");
+        }else {
+            check = 0;
+        }
+    } while (check);
 
     fprintf(file,"%d %d\n", m.nlinhas, m.ncolunas);
 
@@ -177,5 +324,5 @@ struct matriz export_matriz(struct matriz m){
     }
 
     fclose(file);
-    return m;
+    return ;
 }

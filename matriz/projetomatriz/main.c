@@ -1,13 +1,22 @@
+/**
+ * @file main.c
+ * @author William Nascimento e Helio Jales
+ * @date 26 jun 2019
+ * @brief ALgoritmo de Manipulação de Matrizes
+ *
+ * @see https://github.com/williambithose/Algoritmos_Programacao/tree/master/matriz/projetomatriz
+ */
+
 #include <stdio.h>
 #include <funcoes.h>
 
-
 int main(){
 
-    struct matriz A,B,C;
-    int aux, ison = 1;
+    struct matriz A,B,C;    /**< Structs das matrizes que serao manipuladas no programa */
+    int aux,                /**< Varaivel auxiliar: indic a funcão desejada             */
+        isOn = 1;           /**< Indica se o programa deve continuar rodando ou nao     */
 
-    while (ison) {
+    while (isOn) {
 
         printf("\n\n");
         aux = menu();
@@ -15,7 +24,6 @@ int main(){
         switch (aux) {
         case 1:
             A = setTamanho(A);
-            printf("%d %d",A.nlinhas, A.ncolunas);
             break;
         case 2:
             B = setTamanho(B);
@@ -32,15 +40,23 @@ int main(){
         case 6:
             B = setManual(B);
             break;
-
+        case 7:
+            C = soma(A,B);
+            break;
+        case 8:
+            C = subtracao(A,B);
+            break;
+        case 9:
+            C = multiplicacao(A,B);
+            break;
         case 10:
-            imprimir(A);
+            printMatriz(A);
             break;
         case 11:
-            imprimir(B);
+            printMatriz(B);
             break;
         case 12:
-            imprimir(C);
+            printMatriz(C);
             break;
         case 13:
             A = import_matriz(A);
@@ -53,15 +69,14 @@ int main(){
             break;
 
         case 16:
-            ison = 0;
+            isOn = 0;
             break;
         default:
-            printf("funcao indisponivel ou comando invalido\n");
+            printf("Funcao indisponivel ou comando invalido :(\n");
             break;
         }
 
     }
-
 
     return 0;
 }
