@@ -47,7 +47,7 @@ int main(){
             C = subtracao(A,B);
             break;
         case 9:
-            //C = multiplicacao(A,B);
+            C = multiplicacao(A,B);
             break;
         case 10:
             printMatriz(A);

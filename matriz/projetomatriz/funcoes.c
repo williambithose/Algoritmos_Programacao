@@ -126,9 +126,9 @@ struct matriz setRandom(struct  matriz m){
      */
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
-        printf("Informe o valor minimo (inteiro)");
+        printf("Informe o valor minimo (valor inteiro): ");
         scanf("%d",&min);
-        printf("Informe o valor máximo (inteiro)");
+        printf("Informe o valor máximo (valor inteiro): ");
         scanf("%d",&max);
 
         for (int i = 0; i < m.nlinhas; ++i){
@@ -155,11 +155,11 @@ struct matriz setManual(struct  matriz m){
      */
     if(m.nlinhas !=0 && m.ncolunas !=0){
 
-        printf("Informe os valores nas posicoes:");
+        printf("Informe os valores nas posicoes:\n");
         int aux;
         for (int i = 0; i < m.nlinhas; ++i){
             for (int j = 0; j < m.ncolunas; ++j){
-                printf("matriz na linha %d e coluna %d : ",i,j);
+                printf("matriz na linha %d e coluna %d : ",i+1,j+1);
                 scanf("%d",&aux);
                 m.dados[i][j] = aux;
             }
@@ -232,6 +232,33 @@ struct matriz subtracao(struct matriz A, struct matriz B){
         printf("TAMANHOS DAS MATRIZES INCOMPATIVEIS !");
 }
 
+struct matriz multiplicacao(struct matriz A, struct matriz B){
+
+    struct matriz C;
+    float mult=0;
+
+    if(A.ncolunas==B.nlinhas){
+
+        C.nlinhas = A.nlinhas;
+        C.ncolunas = B.ncolunas;
+
+        for(int i=0; i<A.nlinhas; i++){
+                    for(int j=0; j<B.ncolunas; j++){
+
+                        C.dados[i][j]=0;
+
+                        for(int X=0; X<B.nlinhas; X++){
+                           mult += A.dados[i][X] * B.dados[X][j];
+                        }
+
+                        C.dados[i][j] = mult;
+                        mult=0;
+                    }
+                }
+        return C;
+    }else
+        printf("TAMANHOS DAS MATRIZES INCOMPATIVEIS !");
+}
 /**
 ************************* FUNCOES DE MANIPULACAO DE ARQUIVO *****************************
 */
