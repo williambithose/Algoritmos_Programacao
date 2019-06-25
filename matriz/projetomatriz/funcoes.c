@@ -55,6 +55,7 @@ int menu(void){
 
 void printMatriz(struct matriz m){
 
+    printf("\n================Valores da Matriz================\n");
     /**
      * Caso a Matriz já exista
      * Imprime seus valores na tela
@@ -223,7 +224,7 @@ struct matriz subtracao(struct matriz A, struct matriz B){
 
         for (int i = 0; i < A.nlinhas; ++i){
             for (int j = 0; j < A.ncolunas; ++j){
-                C.dados[i][j] = A.dados[i][j] + B.dados[i][j];
+                C.dados[i][j] = A.dados[i][j] - B.dados[i][j];
             }
         }
 
@@ -273,11 +274,9 @@ struct matriz import_matriz(struct matriz m){
      * Le o diretorio do usuario ate que seja um diretorio valido
      */
     do {
-        printf("Informe o diretório do arquvo: ");
+        printf("Informe o diretório do arquivo: ");
         scanf("%s",diretorio);
-        //printf("%s\n",diretorio);
 
-        // /home/williammcn/testeqt/numeros.txt
         /** abre o arquivo para leitura */
         file = fopen(diretorio, "r");
 
@@ -295,7 +294,6 @@ struct matriz import_matriz(struct matriz m){
      * ler valor das linha e colunas, respecticamente
      */
     fscanf(file,"%d %d",&m.nlinhas, &m.ncolunas);
-    printf("Linhas: %d\nColunas:%d\n\n",m.nlinhas,m.ncolunas);
 
     /**
     * Confere se o tamanho da matriz é superior ao tamanho maximo
@@ -344,9 +342,7 @@ void export_matriz(struct matriz m){
     do {
         printf("informe o diretório do arquvo: ");
         scanf("%s",diretorio);
-        //printf("%s\n",diretorio);
 
-        // /home/williammcn/testeqt/numeros.txt
         /** abre o arquivo para escrita */
         file = fopen(diretorio, "w");
 

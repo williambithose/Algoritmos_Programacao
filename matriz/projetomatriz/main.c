@@ -18,6 +18,7 @@ int main(){
 
     while (isOn) {
 
+
         printf("\n\n");
         aux = menu();
 
@@ -65,7 +66,7 @@ int main(){
             B = import_matriz(B);
             break;
         case 15:
-            export_matriz(A);
+            export_matriz(C);
             break;
         case 16:
             isOn = 0;

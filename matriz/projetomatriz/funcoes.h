@@ -131,7 +131,15 @@ struct matriz multiplicacao(struct matriz A, struct matriz B);
  * @brief Le os valores de um aquivo .txt do diretorio indicado pelo usuario
  * e atribui a um struct matriz
  *
- * DETALHAR AS RESTRICOES NO ARQUIVO
+ * O arquivo a ser lido deve ser no formato .txt
+ * E deve conter:
+ *  Na primeira linha o numero de linhas e colunas respectivamente
+ *  Em seguida os dados devidamente organizados
+ *  EX:
+ *      3 3
+ *      1 2 3
+ *      4 5 6
+ *      7 8 9
  *
  * Entrada:
  * m: Struct da matriz a ser atribuido os valores
